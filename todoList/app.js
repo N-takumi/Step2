@@ -8,11 +8,12 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+var app = express();
+
+
 // mongooseを用いてMongoDBに接続する
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/todoList');
-
-var app = express();
+mongoose.connect('mongodb://localhost/todo_list');
 
 
 // ToDoスキーマを定義する
@@ -24,7 +25,6 @@ var todoSchema = new Schema({
   limitDate   : Date
 });
 mongoose.model('Todo', todoSchema);
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -69,7 +69,6 @@ app.post('/todo', function(req, res) {
     res.send(false);
   }
 });
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
