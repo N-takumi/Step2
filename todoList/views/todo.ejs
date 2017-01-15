@@ -1,10 +1,11 @@
 <%# header.ejsの読み込み%>
 <%- include('header') -%>
 
-  <h1><%=listName%></h1>
+  <h3><%=listName%></h3>
 
   <%#todoデータ取得%>
   <%var data = todos;%>
+  <%console.log(data);%>
 
   <%# Todo入力フォームを作成する%>
   <div class="Form">
@@ -30,7 +31,11 @@
     <h2>Todoが作成されていません</h2>
   <%}%>
 
-  <list class='list'></list>
+  <% data.forEach(function(detail){%>
+  <div id="todoDetail">
+    <h2><%=detail.text %></h2>
+  </div>
+  <%});%>
 
   <%# jQueryとindex.jsを読み込む%>
   <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>

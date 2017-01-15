@@ -23,7 +23,8 @@ var todoSchema = new Schema({
   isCheck     : {type: Boolean, default: false},
   text        : String,
   createdDate : {type: Date, default: Date.now},
-  limitDate   : Date
+  limitDate   : Date,
+  listName:String
 });
 mongoose.model('Todo', todoSchema);
 
@@ -117,12 +118,14 @@ app.get('/todo', function(req, res) {
 app.post('/todo', function(req, res) {
   var name = req.body.name;
   var limit = req.body.limit;
+  var listName = req.body.listName;
   // ToDoの名前と期限のパラーメタがあればMongoDBに保存
   if(name && limit) {
     var Todo = mongoose.model('Todo');
     var todo = new Todo();
     todo.text = name;
     todo.limitDate = limit;
+    todo.listName = listName;
     todo.save();
 
     res.send(true);
