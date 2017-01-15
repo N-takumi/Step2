@@ -1,0 +1,39 @@
+<%# header.ejsの読み込み%>
+<%- include('header') -%>
+
+  <h1><%=listName%></h1>
+
+  <%#todoデータ取得%>
+  <%var data = todos;%>
+
+  <%# Todo入力フォームを作成する%>
+  <div class="Form">
+    <p>新しいTodoを作成する</p>
+    <form id='form'>
+      <p>
+        <label for='text'>内容</label>
+        <input id='text' type='text' name='text'/>
+      </p>
+      <p>
+        <label for='limit'>期限</label>
+        <input id='limit' type='date' name='limit'/>
+      </p>
+      <p>
+        <input type='submit' value='Todoの追加'/>
+      </p>
+    </form>
+  </div>
+
+
+  <%# todo一覧を表示する%>
+  <%if(data.length == '0'){%>
+    <h2>Todoが作成されていません</h2>
+  <%}%>
+
+  <list class='list'></list>
+
+  <%# jQueryとindex.jsを読み込む%>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script src='../javascripts/todo.js'></script>
+
+<% include footer %>

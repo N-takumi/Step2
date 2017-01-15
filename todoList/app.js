@@ -18,6 +18,7 @@ mongoose.connect('mongodb://localhost/todo_list');
 
 // ToDoスキーマを定義する
 var Schema = mongoose.Schema;
+
 var todoSchema = new Schema({
   isCheck     : {type: Boolean, default: false},
   text        : String,
@@ -25,6 +26,13 @@ var todoSchema = new Schema({
   limitDate   : Date
 });
 mongoose.model('Todo', todoSchema);
+
+//listスキーマを定義する write 1/12
+var listSchema = new Schema({
+  listName  :String
+});
+mongoose.model('List',listSchema);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,8 +46,61 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+
+//ルーティング
+
+// /にGETアクセス時、Todo,List一覧を取得
+app.get('/',function (req,res) {
+  var List = mongoose.model('List');
+  List.find({},function (err,lists){
+    var Todo = mongoose.model('Todo');
+    Todo.find({},function (err,todos){
+      res.render('index',{lists:lists,todos:todos});
+    });
+  });
+});
+
+
+//app.use('/', index);
+//app.use('/users', users);
+
+// /listに GETアクセス時,List一覧を取得
+app.get('/list', function(req,res){
+  var List = mongoose.model('List');
+  //すべてのListを取得して送る
+  List.find({}, function(err,lists){
+    res.send(lists);
+  });
+});
+
+// /listに POSTアクセス時,Listを追加する
+app.post('/list', function(req,res){
+  var listName = req.body.title;
+  console.log(listName);
+  if(listName){
+    var List = mongoose.model('List');
+    var list = new List();
+    list.listName = listName;
+    list.save();
+
+    res.send(true);
+  }else{
+    res.send(false);
+  }
+});
+
+//リストの詳細ページにアクセス
+app.get('/listPage/:listName',function(req,res){
+  if(req.params.listName){
+    var Todo = mongoose.model('Todo');
+    var listName = req.params.listName;
+    Todo.find({listName:listName}, function(err, todos){
+      if(!err){
+        res.render('todo',{todos:todos, listName:listName});
+      }
+    });
+  }
+});
 
 
 // /todoにGETアクセスしたとき、ToDo一覧を取得するAPI

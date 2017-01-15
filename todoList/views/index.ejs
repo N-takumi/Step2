@@ -1,27 +1,47 @@
-<!DOCTYPE html>
-<html>
   <%# header.ejsの読み込み%>
   <%- include('header') -%>
-  <body>
-    <h1>Todo</h1>
-    <%# ToDo入力フォームを作成する%>
-    <form id='form'>
-      <p>
-        <label for='text'>内容</label>
-        <input id='text' type='text' name='text'/>
-      </p>
-      <p>
-        <label for='limit'>期限</label>
-        <input id='limit' type='date' name='limit'/>
-      </p>
-      <p>
-        <input type='submit' value='登録する'/>
-      </p>
-    </form>
-    <%# ToDo一覧を表示する%>
+
+  <%
+      var todoData = todos;
+      var listData = lists;
+      console.log(todoData[0]);
+      console.log(listData[0].listName);
+  %>
+
+
+  <%# List入力フォームを作成する%>
+    <div class="Form">
+      <p>新しいTodoを作成する</p>
+      <form id='form'>
+        <p>
+          <label for='text'>リスト</label>
+          <input id='listText' type='text' name='text'maxlength="30"/>
+        </p>
+
+        <p>
+          <input type='submit' value='リストの作成'/>
+        </p>
+      </form>
+    </div>
+
+    <%#リスト一覧の表示%>
+    <% for(var i=0;i < listData.length;i++){%>
+
+      <div id="list">
+        <a href="/listPage/<%=listData[i].listName%>"><p><%= listData[i].listName%></p></a>
+      </div>
+
+
+    <%}%>
+
+
+
+
+  <%# List一覧を表示する%>
     <list class='list'></list>
-    <%# jQueryとtodo.jsを読み込む%>
+
+    <%# jQueryとindex.jsを読み込む%>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-    <script src='javascripts/todo.js'></script>
-  </body>
-</html>
+    <script src='javascripts/index.js'></script>
+
+  <%- include('footer') -%>
