@@ -129,7 +129,6 @@ app.post('/todo', function(req, res) {
   var listName = req.body.listName;
   // ToDoの名前と期限のパラーメタがあればMongoDBに保存
   if(name && limit) {
-
     todo.text = name;
     todo.limitDate = limit;
     todo.listName = listName;
@@ -138,6 +137,11 @@ app.post('/todo', function(req, res) {
   } else {
     res.send(false);
   }
+});
+
+//リスト,Todo検索検索ページにアクセス
+app.get('/search',function(req,res){
+  res.render('search');
 });
 
 // catch 404 and forward to error handler
