@@ -77,7 +77,7 @@ app.get('/list', function(req,res){
 // /listに POSTアクセス時,Listを追加する
 app.post('/list', function(req,res){
   var listName = req.body.title;
-  console.log(listName);
+  //console.log(listName);
   if(listName){
     var List = mongoose.model('List');
     var list = new List();
@@ -116,18 +116,24 @@ app.get('/todo', function(req, res) {
 
 // /todoにPOSTアクセスしたとき、ToDoを追加するAPI
 app.post('/todo', function(req, res) {
+
+  //console.log(req.body);
+  var Todo = mongoose.model('Todo');
+  var todo = new Todo();
+  //チェックボックスの更新
+  Todo.update({_id:req.body._id}, {isCheck:req.body.flag}, {upsert: true}, function(err) {
+  });
+
   var name = req.body.name;
-  var limit = req.body.limit;
+  var limit = req.body.limitDate;
   var listName = req.body.listName;
   // ToDoの名前と期限のパラーメタがあればMongoDBに保存
   if(name && limit) {
-    var Todo = mongoose.model('Todo');
-    var todo = new Todo();
+
     todo.text = name;
     todo.limitDate = limit;
     todo.listName = listName;
     todo.save();
-
     res.send(true);
   } else {
     res.send(false);

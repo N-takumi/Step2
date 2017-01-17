@@ -1,5 +1,8 @@
+html,body{
+  padding: 0;
+  margin: 0;
+}
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -12,9 +15,22 @@ a {
 }
 
 .Form{
+  border-radius: 2px;
   background-color: darkgray;
+  padding: 1%;
+  margin: 1%;
 }
 
-.list{
-  background-color: darkgray;
+#list{
+  background-color: #a0d8ef;
+  border-radius: 3px;
+  padding: 2%;
+  margin:3%;
+}
+
+#todoDetail{
+  background-color: #a0d8ef;
+  border-radius: 3px;
+  padding: 2%;
+  margin:3%;
 }
