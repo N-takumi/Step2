@@ -1,15 +1,18 @@
 <%# header.ejsの読み込み%>
 <%- include('header') -%>
 
+<div class="content">
+
+
   <h1 class='listName'><%=listName%></h1>
 
   <%#todoデータ取得%>
   <%var data = todos.reverse();%>
-  <%console.log(data);%>
+  <%#console.log(data);%>
 
   <%# Todo入力フォームを作成する%>
   <div class="Form">
-    <p>新しいTodoを作成する</p>
+    <h2>新しいTodoを作成する</h2>
     <form id='form'>
       <p>
         <label for='text'>内容</label>
@@ -44,8 +47,11 @@
   </div>
   <%});%>
 
+</div>
+
   <%# jQueryとindex.jsを読み込む%>
-  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <!-- <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script> -->
+  <script src='../javascripts/jquery/jquery-3.1.1.min.js'></script>
   <script src='../javascripts/todo.js'></script>
 
 <% include footer %>

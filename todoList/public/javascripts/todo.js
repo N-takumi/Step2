@@ -6,6 +6,7 @@ $('#form').submit(function(){
 
 //checkboxクリック時
 $('.checkbox').change(function(){
+  console.log($(this).prop('checked'));
   $.ajax({
     url:'/todo',
     type:'POST',
@@ -34,10 +35,8 @@ function postTodo() {
 
   // /todoにPOSTアクセスする
   $.post('/todo',todo,function(res){
-
     if(res){
-      location.reload();
-      console.log(res);
+      //location.reload();
     }else{
       console.log(res);
     }

@@ -120,9 +120,15 @@ app.post('/todo', function(req, res) {
   //console.log(req.body);
   var Todo = mongoose.model('Todo');
   var todo = new Todo();
+
   //チェックボックスの更新
-  Todo.update({_id:req.body._id}, {isCheck:req.body.flag}, {upsert: true}, function(err) {
-  });
+  if(req.body._id != null){
+    Todo.update({_id:req.body._id}, {isCheck:req.body.flag}, {upsert: true}, function(err) {
+    console.log(req.body._id);
+    });
+  }
+
+  //console.log(req.body.flag);
 
   var name = req.body.name;
   var limit = req.body.limitDate;
@@ -142,6 +148,23 @@ app.post('/todo', function(req, res) {
 //リスト,Todo検索検索ページにアクセス
 app.get('/search',function(req,res){
   res.render('search');
+});
+
+//検索機能
+app.get('/Search/:text',function(req,res){
+  console.log(req.params);
+  if(req.params.text){
+    var Todo = mongoose.model('Todo');
+    //正規表現を用いる
+    re = new RegExp(req.params.text,'g');
+    Todo.find({text: re}, function(err, search){
+      console.log(err);
+      console.log(search);
+      if(!err){
+        res.send(search);
+      }
+    });
+  }
 });
 
 // catch 404 and forward to error handler
