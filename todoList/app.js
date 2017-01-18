@@ -30,7 +30,8 @@ mongoose.model('Todo', todoSchema);
 
 //listスキーマを定義する write 1/12
 var listSchema = new Schema({
-  listName  :String
+  listName  :String,
+  createdDate : {type: Date, default: Date.now},
 });
 mongoose.model('List',listSchema);
 
@@ -152,18 +153,22 @@ app.get('/search',function(req,res){
 
 //検索機能
 app.get('/Search/:text',function(req,res){
-  console.log(req.params);
+  //console.log(req.params);
   if(req.params.text){
-    var Todo = mongoose.model('Todo');
+
     //正規表現を用いる
     re = new RegExp(req.params.text,'g');
-    Todo.find({text: re}, function(err, search){
-      console.log(err);
-      console.log(search);
-      if(!err){
-        res.send(search);
-      }
+
+    var List = mongoose.model('List');
+    List.find({listName:re},function(err,resList){
+      var Todo = mongoose.model('Todo');
+      Todo.find({text:re},function(err,resTodo){
+        if(!err){
+          res.send({resTodo:resTodo,resList:resList});
+        }
+      });
     });
+
   }
 });
 

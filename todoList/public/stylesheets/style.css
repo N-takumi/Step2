@@ -79,3 +79,13 @@ a:hover { color: #78B9FF }
   display: none;
   font-weight: bold;
 }
+
+#searchMessageTodo{
+  display: none;
+  font-weight: bold;
+}
+
+#searchMessageList{
+  display: none;
+  font-weight: bold;
+}
