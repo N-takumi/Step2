@@ -15,13 +15,11 @@ $('#searchBtn').click(function(){
     return false;
   }
 
+
   //検索ワードでsearchにGETアクセス
   $.get('/Search/' + $('#searchText').val(),function(data){
     var resTodo = data.resTodo.reverse();
     var resList = data.resList.reverse();
-    console.log(data);
-    console.log(resTodo);
-    console.log(resList);
     var seTodo = $('#searchResTodo');
     var seList = $('#searchResList');
       //Todoの検索
@@ -33,10 +31,11 @@ $('#searchBtn').click(function(){
         $('#searchMessageTodo').text('Todoが'+resTodo.length+'件見つかりました').fadeIn();
 
         $.each(resTodo,function(index,d){
-          console.log(d.limitDate.toLocaleString());
+          var inputDate_limit = new Date(d.limitDate);
+          var inputDate_created = new Date(d.createdDate);
           seTodo.append("<li class = 'searchList'><a href = /listPage/"+encodeURIComponent(d.listName)+">"+escapeText(d.text)+
-          "</a>"+"<p>リスト:"+d.listName+"</p>"+"<p>期限:"+d.limitDate.toLocaleString()+"</p>"+
-          "<p>作成日:"+d.createdDate.toLocaleString()+"<p>"+"</li>");
+          "</a>"+"<p>リスト:"+d.listName+"</p>"+"<p>期限:"+inputDate_limit.toLocaleString()+"</p>"+
+          "<p>作成日:"+inputDate_created.toLocaleString()+"<p>"+"</li>");
         });
 
       }
@@ -50,8 +49,9 @@ $('#searchBtn').click(function(){
         $('#searchMessageList').text('Todoリストが'+resList.length+'件見つかりました').fadeIn();
 
         $.each(resList,function(index,d){
+          var inputDateList = new Date(d.createdDate);
           seList.append("<li><a href = /listPage/"+encodeURIComponent(d.listName)+">"+escapeText(d.listName)+"</a>"+
-          "<p>作成日:"+d.createdDate.toLocaleString()+"</p>"+"</li>");
+          "<p>作成日:"+inputDateList.toLocaleString()+"</p>"+"</li>");
         });
       }
   });
