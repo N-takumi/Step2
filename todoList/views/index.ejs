@@ -6,8 +6,8 @@
     var listData = lists.reverse();
     var todoData = todos.reverse();
 
-    //escape用関数
-    function escapeText(text){
+    //escape用関数(HTMLタグ)
+    function escapeHTML(text){
       var TABLE_FOR_ESCAPE_HTML = {
       "&":"&amp;",
       "\"":"&quot;",
@@ -19,6 +19,7 @@
         return TABLE_FOR_ESCAPE_HTML[match];
       });
     }
+
 
   %>
 
@@ -78,7 +79,7 @@
             }
 
             //date型としてchangedDateに代入
-            if(!checked.isCheck){
+            if(!checked.isCheck){//チェック済みは含まない
               var changedDate = new Date(checked.limitDate);
 
               //date型を数値に変換して、現在日時と期日の差を出す
@@ -111,7 +112,7 @@
     <% for(var i=0;i < listData.length;i++){%>
 
       <div id='list'>
-        <a href='/listPage/<%=listData[i].listName%>'><p><%= (listData[i].listName)%></p></a>
+        <a href='/listPage/<%= encodeURIComponent(listData[i].listName)%>'><p><%= (listData[i].listName)%></p></a>
         <p class = 'finished'>
           <% if(todoValues[i]['todoCount'] == 0){%>
             Todoがありません
