@@ -91,6 +91,7 @@ function getList(){
         $list.append('<h3>登録されているリストがありません</h3>');
       }else{
         for(var i = 0;i < listData.length;i++){
+          console.log(todoValues[i]['date']);
           $list.append('<div id = "list">'
                       +'<a href =/listPage/'+encodeURIComponent(listData[i].listName)+'>'
                       +'<p>'+escapeText(listData[i].listName)+'</p></a>'

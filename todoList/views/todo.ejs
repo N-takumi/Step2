@@ -8,7 +8,7 @@
 
   <%#todoデータ取得%>
   <%var data = todos.reverse();%>
-  <%#console.log(data);%>
+  <%#console.log(data[0].limitDate);%>
 
   <%# Todo入力フォームを作成する%>
   <div class="Form">
@@ -35,6 +35,7 @@
   <%}%>
 
   <% data.forEach(function(detail){%>
+    <% console.log(detail.limitDate.toLocaleString())%>
   <div id="todoDetail">
     <h2><%=detail.text %></h2>
     <%if(detail.isCheck){%>
@@ -42,6 +43,7 @@
     <%}else{%>
       <input class='checkbox'type='checkbox'  value="<%=detail._id%>">
     <%}%>
+
     <p class='limitDate'>期限:<%= detail.limitDate.toLocaleString()%></p>
     <p class='createdDate'>作成日:<%= detail.createdDate.toLocaleString() %></p>
   </div>

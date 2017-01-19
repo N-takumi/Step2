@@ -51,6 +51,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //ルーティング
 
+// /にGETアクセスで、Topページ
+app.get('/',function (req,res){
+  res.render('index');
+});
+
 // /dataGetにGETアクセス時、Todo,List一覧を取得
 app.get('/dataGet',function (req,res) {
   var List = mongoose.model('List');
@@ -61,15 +66,6 @@ app.get('/dataGet',function (req,res) {
     });
   });
 });
-
-// /にGETアクセスで、Topページ
-app.get('/',function (req,res){
-  res.render('index');
-});
-
-
-//app.use('/', index);
-//app.use('/users', users);
 
 // /listに GETアクセス時,List一覧を取得
 app.get('/list', function(req,res){
@@ -89,7 +85,6 @@ app.post('/list', function(req,res){
     var list = new List();
     list.listName = listName;
     list.save();
-
     res.send(true);
   }else{
     res.send(false);
