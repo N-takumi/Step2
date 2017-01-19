@@ -5,6 +5,21 @@
     //renderされた配列を逆順で取得
     var listData = lists.reverse();
     var todoData = todos.reverse();
+
+    //escape用関数
+    function escapeText(text){
+      var TABLE_FOR_ESCAPE_HTML = {
+      "&":"&amp;",
+      "\"":"&quot;",
+      "<":"&lt;",
+      ">":"&gt;"
+      };
+
+      return text.replace(/[&"<>]/g,function(match){
+        return TABLE_FOR_ESCAPE_HTML[match];
+      });
+    }
+
   %>
 
 <div class="content">
@@ -26,7 +41,7 @@
 
   <%#リスト一覧の表示%>
     <%
-      //checkBoxのx個中x個チェック済み
+        //checkBoxのx個中x個チェック済み
         //空のオブジェクト作成
         var result = {};
 
@@ -35,7 +50,6 @@
 
         //現在の日時を取得
         var nowTime = new Date();
-
 
         listData.forEach(function(list){
           //keyがlistの連想配列を作成
@@ -62,15 +76,19 @@
             if(checked.isCheck){
               checkCount++;
             }
-            //date型としてchangedDateに代入
-            var changedDate = new Date(checked.limitDate);
 
-            //date型を数値に変換して、現在日時と期日の差を出す
-            var subtraction = Math.abs(changedDate.getTime() - nowTime.getTime());
-            //nullとNaNを排除する
-            if (subtraction != null && !isNaN(subtraction)) {
+            //date型としてchangedDateに代入
+            if(!checked.isCheck){
+              var changedDate = new Date(checked.limitDate);
+
+              //date型を数値に変換して、現在日時と期日の差を出す
+              var subtraction = Math.abs(changedDate.getTime() - nowTime.getTime());
+
+              //nullとNaNを排除する
+              if (subtraction != null && !isNaN(subtraction)) {
               //現在日時と期日の差の配列
               dateValues.push(subtraction);
+              }
             }
           });
 
@@ -93,7 +111,7 @@
     <% for(var i=0;i < listData.length;i++){%>
 
       <div id='list'>
-        <a href='/listPage/<%=listData[i].listName%>'><p><%= listData[i].listName%></p></a>
+        <a href='/listPage/<%=listData[i].listName%>'><p><%= (listData[i].listName)%></p></a>
         <p class = 'finished'>
           <% if(todoValues[i]['todoCount'] == 0){%>
             Todoがありません
@@ -104,12 +122,15 @@
         <p class = 'deadLine'>期限:~<%= todoValues[i]['date'].toLocaleString()%></p>
       </div>
 
-
     <%}%>
 
   <% if(listData.length == 0){%>
     <h3>登録されているTodoリストがありません</h3>
   <%}%>
+
+  <div class="list">
+
+  </div>
 
   <%#エラーメッセージ%>
   <div class="errMessage"></div>

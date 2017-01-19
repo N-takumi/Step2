@@ -17,9 +17,11 @@ $('#searchBtn').click(function(){
 
   //検索ワードでsearchにGETアクセス
   $.get('/Search/' + $('#searchText').val(),function(data){
+    //var a = data.resTodo.limitDate.toLocaleString();
     console.log(data);
     console.log(data.resList.length);
     console.log(data.resTodo.length);
+    //console.log(a);
     var seTodo = $('#searchResTodo');
     var seList = $('#searchResList');
       //Todoの検索
@@ -31,8 +33,8 @@ $('#searchBtn').click(function(){
         $('#searchMessageTodo').text('Todoが'+data.resTodo.length+'件見つかりました').fadeIn();
         data.resTodo.forEach(function(d){
           seTodo.append("<li class = 'searchList'><a href = /listPage/"+d.listName+">"+d.text+"</a>"+
-                      "<p>リスト:"+d.listName+"</p>"+"<p>期限:"+d.limitDate+"</p>"+
-                      "<p>作成日:"+d.createdDate+"<p>"+"</li>");
+                      "<p>リスト:"+d.listName+"</p>"+"<p>期限:"+d.limitDate.toLocaleString()+"</p>"+
+                      "<p>作成日:"+d.createdDate.toLocaleString()+"<p>"+"</li>");
         });
       }
 
@@ -45,7 +47,7 @@ $('#searchBtn').click(function(){
         $('#searchMessageList').text('Todoリストが'+data.resList.length+'件見つかりました').fadeIn();
         data.resList.forEach(function(d){
           seList.append("<li><a href = /listPage/"+d.listName+">"+d.listName+"</a>"+
-          "<p>作成日:"+d.createdDate+"</p>"+"</li>");
+          "<p>作成日:"+d.createdDate.toLocaleString()+"</p>"+"</li>");
         })
       }
 
