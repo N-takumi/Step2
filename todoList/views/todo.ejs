@@ -16,14 +16,10 @@
     <form id='form'>
       <p>
         <label for='text'>内容</label>
-        <input id='text' type='text' name='text'/>
-      </p>
-      <p>
+        <input class = 'formInput' id='todoText' placeholder="◯◯をする"　type='text' name='text'/>
         <label for='limit'>期限</label>
         <input id='limit' type='date' name='limit'/>
-      </p>
-      <p>
-        <input type='submit' value='Todoの追加'/>
+        <input type='submit' value='追加する'/>
       </p>
     </form>
   </div>
@@ -37,12 +33,15 @@
   <% data.forEach(function(detail){%>
     <% console.log(detail.limitDate.toLocaleString())%>
   <div id="todoDetail">
-    <h2><%=detail.text %></h2>
-    <%if(detail.isCheck){%>
-      <input class='checkbox' type='checkbox' checked="checked" value="<%=detail._id%>">
-    <%}else{%>
-      <input class='checkbox'type='checkbox'  value="<%=detail._id%>">
-    <%}%>
+
+    <h2>
+      <%if(detail.isCheck){%>
+        <input class='checkBox' type='checkbox' checked="checked" value="<%=detail._id%>">
+      <%}else{%>
+        <input class='checkBox'type='checkbox'  value="<%=detail._id%>">
+      <%}%>
+      <%=detail.text %>
+    </h2>
 
     <p class='limitDate'>期限:<%= detail.limitDate.toLocaleString()%></p>
     <p class='createdDate'>作成日:<%= detail.createdDate.toLocaleString() %></p>

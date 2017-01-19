@@ -12,6 +12,7 @@ $('#form').submit(function(){
 
 // list一覧を取得して表示する
 function getList(){
+
   // すでに表示されている一覧を非表示にして削除する
   var $list = $('.list');
   $list.slideUp(function(){
@@ -88,18 +89,21 @@ function getList(){
       });
 
       if(listData.length == 0) {
-        $list.append('<h3>登録されているリストがありません</h3>');
+        $list.append('<div id = "listEnp"><h3>登録されているリストがありません</h3>'+
+                      '<p>上のエントリフォームにリスト名を入力してTodoリストを作成してね↑↑↑</p></div>');
       }else{
         for(var i = 0;i < listData.length;i++){
           console.log(todoValues[i]['date']);
           $list.append('<div id = "list">'
-                      +'<a href =/listPage/'+encodeURIComponent(listData[i].listName)+'>'
-                      +'<p>'+escapeText(listData[i].listName)+'</p></a>'
+                      +'<h2><a href =/listPage/'+encodeURIComponent(listData[i].listName)+'>'
+                      +escapeText(listData[i].listName)+'</a></h2>'
                       +'<p class = "finished">'+todoValues[i]['todoCount']+'個中'
                       +todoValues[i]['checkCount']+'個がチェック済み'+'</p>'
-                      +'<p class = deadLine>期限:~'+todoValues[i]['date'].toLocaleString()+'</p>'+'</div>');
+                      +'<p class = limitDate>期限:~'+todoValues[i]['date'].toLocaleString()+'</p>'+'</div>');
         }
       }
+
+
 
       $list.slideDown();
 

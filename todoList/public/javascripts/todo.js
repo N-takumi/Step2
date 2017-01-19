@@ -5,7 +5,7 @@ $('#form').submit(function(){
 });
 
 //checkboxクリック時
-$('.checkbox').change(function(){
+$('.checkBox').change(function(){
   console.log($(this).prop('checked'));
   $.ajax({
     url:'/todo',
@@ -18,7 +18,7 @@ $('.checkbox').change(function(){
 //フォームに入力された内容を追加する
 function postTodo() {
   //フォームに入力された値を取得
-  var name = $('#text').val();
+  var name = $('#todoText').val();
   var limitDate = new Date($('#limit').val());
   var listName = $('.listName').text();
 
@@ -29,6 +29,13 @@ function postTodo() {
     return false;
   }else if(name.length > 30){
     alert('Todoの名称は30字以内にしてください');
+    return false;
+  }
+
+  console.log(limitDate);
+
+  if(limitDate.toString() === 'Invalid Date'){
+    alert('期限が入力されていません');
     return false;
   }
 

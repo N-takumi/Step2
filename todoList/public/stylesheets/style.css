@@ -1,4 +1,4 @@
-html,body,h1,a,h5{
+html,body,h1,a,h5,h2,h3,p{
   padding: 0;
   margin: 0;
 }
@@ -8,23 +8,29 @@ body {
   background-color: #E7E9DE;
 }
 
+
 a {
-color: black;
+  color: black;
+  transition: color .5s;
 }
 
-a:hover { color: #78B9FF }
+a:hover {
+  color: #78B9FF;
+}
 
 #headerLogo{
   font-weight: bold;
   color: black;
+  transition: color .3s;
 }
 
 #headerLogo:hover{
   color: white;
+
 }
 
 #header{
-  height: 15vh;
+  height: 14vh;
   width: 100vw;
   position: fixed;
   border-bottom: 4px solid black;
@@ -34,23 +40,39 @@ a:hover { color: #78B9FF }
 .content{
   min-height: 130vh;
   height: auto;
-  padding-top: 15vh;
+  padding-top: 14vh;
 }
 
 .Form{
-  border-radius: 3em .7em 2em .7em/.7em 2em .7em 3em;
+  border-radius: 3em .7em 2em .9em/.7em 2em .7em 3em;
   border: 4px solid black;
   background-color: #78B9FF;
   padding: 1%;
   margin: 1%;
 }
 
+.formInput{
+  font-size: 15pt;
+}
+
+.listName{
+  margin: 2%;
+}
+
 #list{
   background-color:white;
-  border-radius: 3em .7em 2em .7em/.7em 2em .7em 3em;
+  border-radius: 3em .7em 5em .7em/.7em 2em .7em 3em;
   border: 2px solid black;
   padding: 2%;
   margin:3%;
+}
+
+#listEnp{
+  display: inline-block;
+  border: 2px solid black;
+  margin: 2%;
+  padding: 2%;
+  background-color: darkgray;
 }
 
 .errMessage{
@@ -63,6 +85,18 @@ a:hover { color: #78B9FF }
   border-radius: 3em .7em 2em .7em/.7em 2em .7em 3em;
   padding: 2%;
   margin:3%;
+}
+
+.checkBox{
+  display: inline-block;
+}
+
+.limitDate{
+  color:  rgba(247,171,173,0.85);
+}
+
+.createdDate{
+  color: rgba(126,203,220,0.85);
 }
 
 .searchList{
