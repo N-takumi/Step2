@@ -51,15 +51,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //ルーティング
 
-// /にGETアクセス時、Todo,List一覧を取得
-app.get('/',function (req,res) {
+// /dataGetにGETアクセス時、Todo,List一覧を取得
+app.get('/dataGet',function (req,res) {
   var List = mongoose.model('List');
   List.find({},function (err,lists){
     var Todo = mongoose.model('Todo');
     Todo.find({},function (err,todos){
-      res.render('index',{lists:lists,todos:todos});
+      res.send({lists:lists,todos:todos});
     });
   });
+});
+
+// /にGETアクセスで、Topページ
+app.get('/',function (req,res){
+  res.render('index');
 });
 
 

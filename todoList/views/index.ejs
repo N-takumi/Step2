@@ -1,27 +1,6 @@
   <%# header.ejsの読み込み%>
   <%- include('header') -%>
 
-  <%
-    //renderされた配列を逆順で取得
-    var listData = lists.reverse();
-    var todoData = todos.reverse();
-
-    //escape用関数(HTMLタグ)
-    function escapeHTML(text){
-      var TABLE_FOR_ESCAPE_HTML = {
-      "&":"&amp;",
-      "\"":"&quot;",
-      "<":"&lt;",
-      ">":"&gt;"
-      };
-
-      return text.replace(/[&"<>]/g,function(match){
-        return TABLE_FOR_ESCAPE_HTML[match];
-      });
-    }
-
-
-  %>
 
 <div class="content">
 
@@ -40,104 +19,10 @@
       </form>
     </div>
 
-  <%#リスト一覧の表示%>
-    <%
-        //checkBoxのx個中x個チェック済み
-        //空のオブジェクト作成
-        var result = {};
-
-        //todoValues配列を作成(todoの数,そのうちチェックされた数,一番迫っている期限)
-        var todoValues = [];
-
-        //現在の日時を取得
-        var nowTime = new Date();
-
-        listData.forEach(function(list){
-          //keyがlistの連想配列を作成
-          result[list] = [];
-
-          todoData.forEach(function(todo){
-          //リストとTodoのlistNameが等しい場合
-          if(todo.listName == list.listName){
-          //リストとその中に含まれるTodoを一致させる
-          result[list].push(todo);
-          }
-          });
-
-          //checkされている数
-          var checkCount = 0;
-
-          //あるリストに含まれるtodoの数
-          var todoCount = result[list].length;
-
-          //Dateを入れる配列
-          var dateValues = [];
-
-          result[list].forEach(function(checked){
-            if(checked.isCheck){
-              checkCount++;
-            }
-
-            //date型としてchangedDateに代入
-            if(!checked.isCheck){//チェック済みは含まない
-              var changedDate = new Date(checked.limitDate);
-
-              //date型を数値に変換して、現在日時と期日の差を出す
-              var subtraction = Math.abs(changedDate.getTime() - nowTime.getTime());
-
-              //nullとNaNを排除する
-              if (subtraction != null && !isNaN(subtraction)) {
-              //現在日時と期日の差の配列
-              dateValues.push(subtraction);
-              }
-            }
-          });
-
-          //現在時刻と期日とのさの中から最も小さい値のindexを取り出す
-          var min = Math.abs(dateValues.indexOf(Math.min.apply(null, dateValues)));
-
-          //取得したindex番号の数値を元にdateに変換する
-          var minDate = new Date(dateValues[min] + nowTime.getTime());
-
-          //3種の値をハッシュにして配列に格納する
-          todoValues.push({
-            todoCount:todoCount,
-            checkCount:checkCount,
-            date:minDate
-          });
-        });
-    %>
-
-
-    <% for(var i=0;i < listData.length;i++){%>
-
-      <div id='list'>
-        <a href='/listPage/<%= encodeURIComponent(listData[i].listName)%>'><p><%= (listData[i].listName)%></p></a>
-        <p class = 'finished'>
-          <% if(todoValues[i]['todoCount'] == 0){%>
-            Todoがありません
-          <%}else{%>
-            <%=todoValues[i]['todoCount']%>個中<%=todoValues[i]['checkCount']%>個がチェック済み
-          <%}%>
-        </p>
-        <p class = 'deadLine'>期限:~<%= todoValues[i]['date'].toLocaleString()%></p>
-      </div>
-
-    <%}%>
-
-  <% if(listData.length == 0){%>
-    <h3>登録されているTodoリストがありません</h3>
-  <%}%>
-
-  <div class="list">
-
-  </div>
-
-  <%#エラーメッセージ%>
-  <div class="errMessage"></div>
-
-
   <%# List一覧を表示する%>
+  <div class="list"></div>
+
+
 
 </div>
 

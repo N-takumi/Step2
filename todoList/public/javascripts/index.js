@@ -18,20 +18,93 @@ function getList(){
     $list.children().remove();
 
     // /listにGETアクセスする
-    $.get('list', function(lists){
+    $.get('/dataGet', function(data){
+      //getしたdata配列をそれぞれ逆順で格納
+      var listData = data.lists.reverse();
+      var todoData = data.todos.reverse();
 
-      // 取得したlistを追加していく
-      $.each(lists, function(index, list){
-        var title = list.listName;
-        $list.append('<p>'+title+'</p>');
+    //リストの表示処理
+      //空のオブジェクト作成
+      var result = {};
+
+      //todoValues配列(todoの数,チェックされたtodoの数,最も近い締め切り)
+      var todoValues = [];
+
+      //現在日時取得
+      var nowTime = new Date();
+
+      $.each(listData, function(index,list){
+        //keyがlistの連想配列を作成
+        result[list] = [];
+
+        $.each(todoData, function(index,todo){
+          //listNameを照合してTodoとリストを対応させる
+          if(todo.listName == list.listName){
+            result[list].push(todo);
+          }
+        });
+
+        //現在チェックされているtodo数
+        var checkCount = 0;
+
+        //リストに含まれるtodoの数
+        var todoCount = result[list].length;
+
+        //Date(日時情報)入れる配列
+        var dateValues = [];
+
+        $.each(result[list], function(index,checked){
+          if(checked.isCheck){
+            checkCount++;
+          }
+
+          //date型でchangedDateに代入
+          if(!checked.isCheck){//チェック済みを除く
+            var changedDate = new Date(checked.limitDate);
+
+            //date型を数値に変換、現在日時と期限との差を出す
+            var subtraction = Math.abs(changedDate.getTime() - nowTime.getTime());
+
+            //nullとNaNの排除
+            if (subtraction != null && !isNaN(subtraction)) {
+            //現在日時と期日の差の配列
+            dateValues.push(subtraction);
+            }
+          }
+        });
+
+        //現在時刻と期日とのさの中から最も小さい値のindexを取り出す
+        var min = Math.abs(dateValues.indexOf(Math.min.apply(null, dateValues)));
+
+        //取得したindex番号の数値を元にdateに変換する
+        var minDate = new Date(dateValues[min] + nowTime.getTime());
+
+        //3種の値をハッシュにして配列に格納する
+        todoValues.push({
+          todoCount:todoCount,
+          checkCount:checkCount,
+          date:minDate
+        });
       });
 
-      // 一覧を表示する
+      if(listData.length == 0) {
+        $list.append('<h3>登録されているリストがありません</h3>');
+      }else{
+        for(var i = 0;i < listData.length;i++){
+          $list.append('<div id = "list">'
+                      +'<a href =/listPage/'+encodeURIComponent(listData[i].listName)+'>'
+                      +'<p>'+escapeText(listData[i].listName)+'</p></a>'
+                      +'<p class = "finished">'+todoValues[i]['todoCount']+'個中'
+                      +todoValues[i]['checkCount']+'個がチェック済み'+'</p>'
+                      +'<p class = deadLine>期限:~'+todoValues[i]['date'].toLocaleString()+'</p>'+'</div>');
+        }
+      }
+
       $list.slideDown();
+
     });
+
   });
-
-
 }
 
 // フォームに入力されたリストを追加する
@@ -62,7 +135,7 @@ function postList(){
     if(flag){
       $.post('/list',{title:title},function(res){
         if(res){
-          location.reload();
+          getList();
         }
           console.log(res);
       });
@@ -72,9 +145,6 @@ function postList(){
 
   //入力項目を空にする
   $('#listText').val('');
-
-  //再表示
-//  getList();
 
 }
 
