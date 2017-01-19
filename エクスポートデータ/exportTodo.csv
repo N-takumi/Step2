@@ -1,0 +1,11 @@
+{"_id":{"$oid":"5880e26e85eb16050d17e64b"},"listName":"実験","limitDate":{"$date":"2017-01-24T00:00:00.000Z"},"text":"レポートを書く","createdDate":{"$date":"2017-01-19T15:59:42.065Z"},"isCheck":false,"__v":0}
+{"_id":{"$oid":"5880e27f85eb16050d17e64c"},"listName":"実験","limitDate":{"$date":"2017-01-27T00:00:00.000Z"},"text":"発表資料を作る","createdDate":{"$date":"2017-01-19T15:59:59.280Z"},"isCheck":false,"__v":0}
+{"_id":{"$oid":"5880e2c685eb16050d17e64d"},"listName":"実験","limitDate":{"$date":"2017-01-23T00:00:00.000Z"},"text":"考察する","createdDate":{"$date":"2017-01-19T16:01:10.356Z"},"isCheck":false,"__v":0}
+{"_id":{"$oid":"5880e30b85eb16050d17e64f"},"listName":"チームラボ課題","limitDate":{"$date":"2017-01-20T00:00:00.000Z"},"text":"エラーチェックする","createdDate":{"$date":"2017-01-19T16:02:19.325Z"},"isCheck":true,"__v":0}
+{"_id":{"$oid":"5880e31f85eb16050d17e650"},"listName":"チームラボ課題","limitDate":{"$date":"2017-01-20T00:00:00.000Z"},"text":"コンセプトを考える","createdDate":{"$date":"2017-01-19T16:02:39.409Z"},"isCheck":true,"__v":0}
+{"_id":{"$oid":"5880e33085eb16050d17e651"},"listName":"チームラボ課題","limitDate":{"$date":"2017-01-20T00:00:00.000Z"},"text":"画面仕様書を満たす","createdDate":{"$date":"2017-01-19T16:02:56.315Z"},"isCheck":true,"__v":0}
+{"_id":{"$oid":"5880e34185eb16050d17e652"},"listName":"チームラボ課題","limitDate":{"$date":"2017-01-20T00:00:00.000Z"},"text":"コード規約チェック","createdDate":{"$date":"2017-01-19T16:03:13.002Z"},"isCheck":true,"__v":0}
+{"_id":{"$oid":"5880e36a85eb16050d17e653"},"listName":"チームラボ課題","limitDate":{"$date":"2017-01-20T00:00:00.000Z"},"text":"デザインを改良する","createdDate":{"$date":"2017-01-19T16:03:54.557Z"},"isCheck":true,"__v":0}
+{"_id":{"$oid":"5880e3a085eb16050d17e654"},"listName":"チームラボ課題","limitDate":{"$date":"2017-01-27T00:00:00.000Z"},"text":"STEP3に進むために祈る","createdDate":{"$date":"2017-01-19T16:04:48.539Z"},"isCheck":true,"__v":0}
+{"_id":{"$oid":"5880e3bc85eb16050d17e655"},"listName":"チームラボ課題","limitDate":{"$date":"2017-01-27T00:00:00.000Z"},"text":"めちゃくちゃ祈る","createdDate":{"$date":"2017-01-19T16:05:16.167Z"},"isCheck":true,"__v":0}
+{"_id":{"$oid":"5880e41a85eb16050d17e65e"},"listName":"CD購入","limitDate":{"$date":"2017-01-31T00:00:00.000Z"},"text":"ONEOKROCK Ambitions","createdDate":{"$date":"2017-01-19T16:06:50.699Z"},"isCheck":false,"__v":0}
