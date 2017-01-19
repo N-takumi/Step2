@@ -27,7 +27,7 @@ function postTodo() {
   if(name.length == 0){
     alert('Todo名が入力されていません');
     return false;
-  }else if(name.length > 30){
+  }else if(name.length >= 31){
     alert('Todoの名称は30字以内にしてください');
     return false;
   }

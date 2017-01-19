@@ -93,13 +93,29 @@ function getList(){
                       '<p>上のエントリフォームにリスト名を入力してTodoリストを作成してね↑↑↑</p></div>');
       }else{
         for(var i = 0;i < listData.length;i++){
-          console.log(todoValues[i]['date']);
+          console.log(todoValues[i]['date'].toLocaleString());
+
+          //期限の表示設定
+          if(todoValues[i]['todoCount'] > 0&&todoValues[i]['date'].toLocaleString() == 'Invalid Date'){
+            var inputDate_limit ='Todoがすべて完了しています';
+          }else if(todoValues[i]['todoCount'] == 0){
+            var inputDate_limit = '';
+          }else{
+            var inputDate_limit = todoValues[i]['date'].toLocaleString();
+          }
+
+          //チェック状況の表示設定
+          if(todoValues[i]['todoCount'] == 0){
+            var inputCheckresult = 'Todoがありません';
+          }else{
+            var inputCheckresult = todoValues[i]['todoCount']+'個中'+todoValues[i]['checkCount']+'個がチェック済み';
+          }
+
           $list.append('<div id = "list">'
                       +'<h2><a href =/listPage/'+encodeURIComponent(listData[i].listName)+'>'
                       +escapeText(listData[i].listName)+'</a></h2>'
-                      +'<p class = "finished">'+todoValues[i]['todoCount']+'個中'
-                      +todoValues[i]['checkCount']+'個がチェック済み'+'</p>'
-                      +'<p class = limitDate>期限:~'+todoValues[i]['date'].toLocaleString()+'</p>'+'</div>');
+                      +'<p class = "finished">'+inputCheckresult+'</p>'
+                      +'<p class = limitDate>期限:~'+inputDate_limit+'</p>'+'</div>');
         }
       }
 
@@ -116,12 +132,13 @@ function getList(){
 function postList(){
   // フォームに入力された値を取得
   var title = $('#listText').val();
+  console.log(title.length);
 
   //文字数チェック
   if(title.length == 0){
     alert('Todoリスト名が入力されていません');
     return false;
-  }else if(title.length > 30){
+  }else if(title.length >= 31){
     alert('Todoリストの名称は30文字以内にしてください');
     return false;
   }

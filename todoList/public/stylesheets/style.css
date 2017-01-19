@@ -1,4 +1,4 @@
-html,body,h1,a,h5,h2,h3,p{
+html,body,h1,a,h5,h2,h3,p,div{
   padding: 0;
   margin: 0;
 }
@@ -6,6 +6,10 @@ html,body,h1,a,h5,h2,h3,p{
 body {
   font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', "メイリオ", Meiryo,'ＭＳ Ｐゴシック', 'MS PGothic', 'IPAPGothic', Helvetica, sans-serif;
   background-color: #E7E9DE;
+}
+
+p{
+  font-size: 13pt;
 }
 
 
@@ -47,6 +51,7 @@ a:hover {
   border-radius: 3em .7em 2em .9em/.7em 2em .7em 3em;
   border: 4px solid black;
   background-color: #78B9FF;
+  width: 60vw;
   padding: 1%;
   margin: 1%;
 }
@@ -56,15 +61,23 @@ a:hover {
 }
 
 .listName{
-  margin: 2%;
+  margin: 1%;
+  width: 60vw;
+  padding: .25em 0 .25em .75em;
+	border-left: 8px solid rgba(247,171,173,0.85);
+  background-color: white;
+  border-radius: 4px;
 }
+
 
 #list{
   background-color:white;
   border-radius: 3em .7em 5em .7em/.7em 2em .7em 3em;
   border: 2px solid black;
   padding: 2%;
-  margin:3%;
+  margin:2%;
+  width: 50vw;
+
 }
 
 #listEnp{
@@ -72,6 +85,14 @@ a:hover {
   border: 2px solid black;
   margin: 2%;
   padding: 2%;
+  background-color: darkgray;
+}
+
+#todoEmp{
+  display: inline-block;
+  border: 2px solid black;
+  margin: 2%;
+  padding: 1%;
   background-color: darkgray;
 }
 
@@ -99,6 +120,19 @@ a:hover {
   color: rgba(126,203,220,0.85);
 }
 
+#searchLogo{
+  margin: 1%;
+  width: 55vw;
+  padding: .25em 0 .25em .75em;
+  border-left: 8px solid rgba(126,203,220,0.85);
+  background-color: white;
+  border-radius: 4px;
+}
+
+#searchText{
+  font-size: 15pt;
+}
+
 .searchList{
   width: auto;
   display: block;
@@ -106,20 +140,26 @@ a:hover {
   border-radius: 3em .7em 2em .7em/.7em 2em .7em 3em;
   box-sizing: border-box;
   padding: 1%;
-  margin: 0;
+  margin: 1%;
 }
 
 #searchMessage{
   display: none;
   font-weight: bold;
+  margin: 1%;
+  font-size: 13pt;
 }
 
 #searchMessageTodo{
   display: none;
   font-weight: bold;
+  margin: 1%;
+  font-size: 13pt;
 }
 
 #searchMessageList{
   display: none;
   font-weight: bold;
+  margin: 1%;
+  font-size: 13pt;
 }

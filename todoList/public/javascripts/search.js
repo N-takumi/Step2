@@ -33,9 +33,10 @@ $('#searchBtn').click(function(){
         $.each(resTodo,function(index,d){
           var inputDate_limit = new Date(d.limitDate);
           var inputDate_created = new Date(d.createdDate);
-          seTodo.append("<li class = 'searchList'><a href = /listPage/"+encodeURIComponent(d.listName)+">"+escapeText(d.text)+
-          "</a>"+"<p>リスト:"+d.listName+"</p>"+"<p>期限:"+inputDate_limit.toLocaleString()+"</p>"+
-          "<p>作成日:"+inputDate_created.toLocaleString()+"<p>"+"</li>");
+          seTodo.append("<li class = 'searchList'><a href = /listPage/"+encodeURIComponent(d.listName)+"><h2>"+escapeText(d.text)+
+          "<h2></a>"+"<p>リスト:"+escapeText(d.listName)+"</p>"+"<p class='limitDate'>"
+          +"期限:"+inputDate_limit.toLocaleString()+"</p>"+
+          "<p class = 'createdDate'>作成日:"+inputDate_created.toLocaleString()+"<p>"+"</li>");
         });
 
       }
@@ -50,8 +51,8 @@ $('#searchBtn').click(function(){
 
         $.each(resList,function(index,d){
           var inputDateList = new Date(d.createdDate);
-          seList.append("<li><a href = /listPage/"+encodeURIComponent(d.listName)+">"+escapeText(d.listName)+"</a>"+
-          "<p>作成日:"+inputDateList.toLocaleString()+"</p>"+"</li>");
+          seList.append("<li class = 'searchList'><a href = /listPage/"+encodeURIComponent(d.listName)+">"+escapeText(d.listName)+"</a>"+
+          "<p class='createdDate'>作成日:"+inputDateList.toLocaleString()+"</p>"+"</li>");
         });
       }
   });
