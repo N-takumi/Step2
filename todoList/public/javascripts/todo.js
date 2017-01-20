@@ -32,8 +32,6 @@ function postTodo() {
     return false;
   }
 
-  console.log(limitDate);
-
   if(limitDate.toString() === 'Invalid Date'){
     alert('期限が入力されていません');
     return false;

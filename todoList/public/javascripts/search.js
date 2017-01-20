@@ -1,8 +1,6 @@
-
 //検索ボタンクリック時
 $('#searchBtn').click(function(){
-//console.log($('#searchText').val());
-  //すでにある要素を削除
+//すでにある要素を削除
   var $li = $('li');
   $li.remove();
 

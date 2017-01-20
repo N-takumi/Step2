@@ -28,7 +28,7 @@ var todoSchema = new Schema({
 });
 mongoose.model('Todo', todoSchema);
 
-//listスキーマを定義する write 1/12
+//listスキーマを定義する
 var listSchema = new Schema({
   listName  :String,
   createdDate : {type: Date, default: Date.now},
@@ -79,7 +79,6 @@ app.get('/list', function(req,res){
 // /listに POSTアクセス時,Listを追加する
 app.post('/list', function(req,res){
   var listName = req.body.title;
-  //console.log(listName);
   if(listName){
     var List = mongoose.model('List');
     var list = new List();
@@ -117,8 +116,6 @@ app.get('/todo', function(req, res) {
 
 // /todoにPOSTアクセスしたとき、ToDoを追加するAPI
 app.post('/todo', function(req, res) {
-
-  //console.log(req.body);
   var Todo = mongoose.model('Todo');
   var todo = new Todo();
 
@@ -129,12 +126,10 @@ app.post('/todo', function(req, res) {
     });
   }
 
-  //console.log(req.body.flag);
-
   var name = req.body.name;
   var limit = req.body.limitDate;
   var listName = req.body.listName;
-  // ToDoの名前と期限のパラーメタがあればMongoDBに保存
+  // ToDoの名前と期限のパラメ-タがあればMongoDBに保存
   if(name && limit) {
     todo.text = name;
     todo.limitDate = limit;
@@ -153,7 +148,6 @@ app.get('/search',function(req,res){
 
 //検索機能
 app.get('/Search/:text',function(req,res){
-  //console.log(req.params);
   if(req.params.text){
 
     //正規表現を用いる
@@ -169,7 +163,7 @@ app.get('/Search/:text',function(req,res){
       });
     });
 
-  }
+  }a
 });
 
 // catch 404 and forward to error handler

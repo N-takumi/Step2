@@ -25,7 +25,6 @@ function getList(){
       var todoData = data.todos.reverse();
 
     //リストの表示処理
-      //空のオブジェクト作成
       var result = {};
 
       //todoValues配列(todoの数,チェックされたtodoの数,最も近い締め切り)
@@ -118,13 +117,8 @@ function getList(){
                       +'<p class = limitDate>期限:~'+inputDate_limit+'</p>'+'</div>');
         }
       }
-
-
-
       $list.slideDown();
-
     });
-
   });
 }
 
@@ -132,7 +126,6 @@ function getList(){
 function postList(){
   // フォームに入力された値を取得
   var title = $('#listText').val();
-  console.log(title.length);
 
   //文字数チェック
   if(title.length == 0){
