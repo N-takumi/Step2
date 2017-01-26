@@ -163,7 +163,7 @@ app.get('/Search/:text',function(req,res){
       });
     });
 
-  }a
+  }
 });
 
 // catch 404 and forward to error handler
